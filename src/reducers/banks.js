@@ -1,14 +1,22 @@
-import { ADD_BANK, DELETE_BANK, UPDATE_BANK, GET_BANKS } from '../constants'
+import { ADD_BANK, DELETE_BANK, UPDATE_BANK } from '../constants'
 
 export default function banks(state = [], action) {
 
   switch (action.type) {
 
+
     case ADD_BANK:
+      console.log('ADD_BANK in reducer')
+      var pk = 0;
+      state.map(b => 
+        pk = parseInt(b.id) + 1 //this is good enough for now.  in finished app, page change will reload state
+      )
+      
       return [
         ...state,
         {
-          id: action.id,
+          //id: action.id,  NOT GETTING DB ID
+          id: pk,
           code: action.code,
           description: action.description
         }
@@ -23,7 +31,7 @@ export default function banks(state = [], action) {
       return state.map(bank =>
         bank.id === action.id ?
           { ...bank, code: action.code, description: action.description } :
-          todo
+          bank
       )
 
     case 'GET_BANK_DATA_RECEIVED':

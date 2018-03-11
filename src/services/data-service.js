@@ -45,7 +45,6 @@ const dataService = store => next => action => {
         request
         .post('http://localhost:3001/banks')
         .send(bank)
-        //.set('X-API-Key', 'foobar')
         .set('Accept', 'application/json')
         .end(function(err, res){
           if (err || !res.ok) {
@@ -72,8 +71,9 @@ const dataService = store => next => action => {
       break
 
     case types.DELETE_BANK:
+        console.log("in middleware delete, id="+action.id)
         request
-        .delete('http://localhost:3001/todos/' + action.id)
+        .delete('http://localhost:3001/banks/' + action.id)
         .end(function(err, res){
           if (err || !res.ok) {
             console.log('Oh no! error ' + err);

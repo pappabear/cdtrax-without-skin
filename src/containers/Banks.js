@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { getBanks } from '../actions';
-import { addBank } from '../actions';
+import { getBanks, addBank, deleteBank } from '../actions';
 
 const mapStateToProps = state => {
       return { 
@@ -22,6 +21,7 @@ class Banks extends Component {
       
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
+        this.handleDelete = this.handleDelete.bind(this)
       }
     
     componentDidMount() 
@@ -37,11 +37,16 @@ class Banks extends Component {
     handleSubmit(event) 
     {
         event.preventDefault()
-        const { code, description } = this.state
         this.props.addBank("xxx", "hardcoded")
         this.setState({ code: "", description: "" })
     }
-    
+
+    handleDelete(id) 
+    {
+        this.props.addBank("xxx", "hardcoded")
+        this.setState({ code: "", description: "" })
+    }
+
     render() {
 
         /*
@@ -56,14 +61,15 @@ class Banks extends Component {
 
         return (
             <div>
+                <h1>Banks</h1>
                 <ul>
                     {this.props.banks.map(bank =>
-                        <li>{bank.description}</li>
+                        <li key={bank.id}>({bank.id}) {bank.description} + [edit] <input type="button" value="Delete me" onClick={ () => this.props.deleteBank(bank.id)} /> </li>
                     )}
                 </ul>
 
                 <form onSubmit={this.handleSubmit}>
-                    <h3>Add</h3>
+                    <h3>Add a Bank</h3>
                     <div>Code
                         <input type="text" name="code" id="code" />
                     </div>
@@ -83,7 +89,8 @@ class Banks extends Component {
 const mapDispatchToProps = (dispatch) => {
     return {
         getBanks: () => dispatch(getBanks()),
-        addBank: (code, description) => dispatch(addBank(code, description))
+        addBank: (code, description) => dispatch(addBank(code, description)),
+        deleteBank: (id) => dispatch(deleteBank(id))
     }
 }
 
