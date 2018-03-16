@@ -21,7 +21,6 @@ class Banks extends Component {
       
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
-        this.handleDelete = this.handleDelete.bind(this)
       }
     
     componentDidMount() 
@@ -41,12 +40,6 @@ class Banks extends Component {
         this.setState({ code: "", description: "" })
     }
 
-    handleDelete(id) 
-    {
-        //this.props.addBank("xxx", "hardcoded")
-        //this.setState({ code: "", description: "" })
-    }
-
     render() {
 
         return (
@@ -54,7 +47,8 @@ class Banks extends Component {
                 <h1>Banks</h1>
                 <ul>
                     {this.props.banks.map(bank =>
-                        <li key={bank.id}>({bank.id}) {bank.description} + [edit] <input type="button" value="Delete me" onClick={ () => this.props.deleteBank(bank.id)} /> </li>
+                        <li key={bank.id}>({bank.id}) {bank.description} + [edit] 
+                            <a href="#" onClick={ () => this.props.deleteBank(bank.id)}>Delete</a> </li>
                     )}
                 </ul>
 

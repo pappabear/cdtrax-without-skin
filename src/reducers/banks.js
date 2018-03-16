@@ -6,7 +6,6 @@ export default function banks(state = [], action) {
 
 
     case ADD_BANK:
-      console.log('ADD_BANK in reducer')
       var pk = 0;
       state.map(b => 
         pk = parseInt(b.id) + 1 //this is good enough for now.  in finished app, page change will reload state
@@ -23,6 +22,7 @@ export default function banks(state = [], action) {
       ]
 
     case DELETE_BANK:
+      console.log('DELETE_BANK in reducer')
       return state.filter(bank =>
         bank.id !== action.id
       )
