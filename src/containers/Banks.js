@@ -37,27 +37,17 @@ class Banks extends Component {
     handleSubmit(event) 
     {
         event.preventDefault()
-        this.props.addBank("xxx", "hardcoded")
+        this.props.addBank(this.state.code, this.state.description)
         this.setState({ code: "", description: "" })
     }
 
     handleDelete(id) 
     {
-        this.props.addBank("xxx", "hardcoded")
-        this.setState({ code: "", description: "" })
+        //this.props.addBank("xxx", "hardcoded")
+        //this.setState({ code: "", description: "" })
     }
 
     render() {
-
-        /*
-        if (this.props.hasErrored) {
-            return <p>Sorry! There was an error loading the items</p>;
-        }
-
-        if (this.props.isLoading) {
-            return <p>Loading…</p>;
-        }
-        */
 
         return (
             <div>
@@ -69,12 +59,20 @@ class Banks extends Component {
                 </ul>
 
                 <form onSubmit={this.handleSubmit}>
-                    <h3>Add a Bank</h3>
+                <h3>Add a Bank</h3>
                     <div>Code
-                        <input type="text" name="code" id="code" />
+                        <input type="text" 
+                               name="code" 
+                               id="code" 
+                               onChange={this.handleChange} 
+                               value={this.state.code} />
                     </div>
                     <div>Description
-                        <input type="text" name="description" id="description" />
+                        <input type="text" 
+                               name="description" 
+                               id="description" 
+                               onChange={this.handleChange} 
+                               value={this.state.description} />
                     </div>
                     <input type="submit" onClick={this.handleSubmit} />
 
