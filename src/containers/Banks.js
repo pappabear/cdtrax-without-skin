@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { getBanks, addBank, deleteBank } from '../actions';
+import { getBanks, addBank, deleteBank, updateBank } from '../actions';
 
 const mapStateToProps = state => {
       return { 
@@ -15,6 +15,7 @@ class Banks extends Component {
         super(props)
 
         this.state = {
+            id: "",
             code: "",
             description: ""
           }
@@ -40,6 +41,11 @@ class Banks extends Component {
         this.setState({ code: "", description: "" })
     }
 
+    handleUpdate(id, code, description) 
+    {
+        this.props.updateBank(id, code + "-e", description + "-e")
+    }
+
     render() {
 
         return (
@@ -47,7 +53,8 @@ class Banks extends Component {
                 <h1>Banks</h1>
                 <ul>
                     {this.props.banks.map(bank =>
-                        <li key={bank.id}>({bank.id}) {bank.description} + [edit] 
+                        <li key={bank.id}>({bank.id}) {bank.description} 
+                            <a href="#" onClick={ () => this.handleUpdate(bank.id, bank.code, bank.description)}>Update</a> 
                             <a href="#" onClick={ () => this.props.deleteBank(bank.id)}>Delete</a> </li>
                     )}
                 </ul>
@@ -82,7 +89,8 @@ const mapDispatchToProps = (dispatch) => {
     return {
         getBanks: () => dispatch(getBanks()),
         addBank: (code, description) => dispatch(addBank(code, description)),
-        deleteBank: (id) => dispatch(deleteBank(id))
+        deleteBank: (id) => dispatch(deleteBank(id)),
+        updateBank: (id, code, description) => dispatch(updateBank(id, code, description))
     }
 }
 

@@ -56,19 +56,19 @@ const dataService = store => next => action => {
         break
 
     case types.UPDATE_BANK:
-      request
-      .put('http://localhost:3001/todos/' + action.id)
-      .send({ title:action.title })
-      //.set('X-API-Key', 'foobar')
-      .set('Accept', 'application/json')
-      .end(function(err, res){
-        if (err || !res.ok) {
-          console.log('Oh no! error ' + err);
-        } else {
-          console.log('SuperAgent is happy, and API call was successful!  ' + JSON.stringify(res.body));
-        }
-      })
-      break
+        bank = {id: action.id, code: action.code, description: action.description }
+        request
+          .put('http://localhost:3001/banks/' + action.id)
+          .send(bank)
+          .set('Accept', 'application/json')
+          .end(function(err, res){
+            if (err || !res.ok) {
+              console.log('Oh no! error ' + err);
+            } else {
+              console.log('SuperAgent is happy, and API call was successful!  ' + JSON.stringify(res.body));
+            }
+          })
+        break
 
     case types.DELETE_BANK:
         console.log("in middleware delete, id="+action.id)
