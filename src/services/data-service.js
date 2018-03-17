@@ -33,26 +33,25 @@ const dataService = store => next => action => {
             that data was received successfully, along with the parsed data
             */
             next({
-              type: 'GET_BANK_DATA_RECEIVED',
+              type: 'GET_BANKS_DATA_RECEIVED',
               data
             })
         })
         break
 
     case types.ADD_BANK:
-        console.log("in middleware, code="+action.code)
         var bank = {code: action.code, description: action.description }
         request
-        .post('http://localhost:3001/banks')
-        .send(bank)
-        .set('Accept', 'application/json')
-        .end(function(err, res){
-          if (err || !res.ok) {
-            console.log('Oh no! error ' + err);
-          } else {
-            console.log('SuperAgent is happy, and API call was successful!  ' + JSON.stringify(res.body));
-          }
-        })
+          .post('http://localhost:3001/banks')
+          .send(bank)
+          .set('Accept', 'application/json')
+          .end(function(err, res){
+            if (err || !res.ok) {
+              console.log('Oh no! error ' + err);
+            } else {
+              console.log('SuperAgent is happy, and API call was successful!  ' + JSON.stringify(res.body));
+            }
+          })
         break
 
     case types.UPDATE_BANK:
@@ -71,16 +70,15 @@ const dataService = store => next => action => {
         break
 
     case types.DELETE_BANK:
-        console.log("in middleware delete, id="+action.id)
         request
-        .delete('http://localhost:3001/banks/' + action.id)
-        .end(function(err, res){
-          if (err || !res.ok) {
-            console.log('Oh no! error ' + err);
-          } else {
-            console.log('SuperAgent is happy, and API call was successful!  ' + JSON.stringify(res.body));
-          }
-        })
+          .delete('http://localhost:3001/banks/' + action.id)
+          .end(function(err, res){
+            if (err || !res.ok) {
+              console.log('Oh no! error ' + err);
+            } else {
+              console.log('SuperAgent is happy, and API call was successful!  ' + JSON.stringify(res.body));
+            }
+          })
         break
 
     /*

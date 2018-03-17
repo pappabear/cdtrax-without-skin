@@ -22,7 +22,6 @@ export default function banks(state = [], action) {
       ]
 
     case DELETE_BANK:
-      console.log('DELETE_BANK in reducer')
       return state.filter(bank =>
         bank.id !== action.id
       )
@@ -34,7 +33,7 @@ export default function banks(state = [], action) {
           bank
       )
 
-    case 'GET_BANK_DATA_RECEIVED':
+    case 'GET_BANKS_DATA_RECEIVED':
       return action.data
   
     default:
